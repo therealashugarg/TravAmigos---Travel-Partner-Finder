@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "33355469857",
+    "project_id": "travelamigos-b5f65",
+    "storage_bucket": "travelamigos-b5f65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:33355469857:android:db4cbd40cdc2cba16eff60",
+        "android_client_info": {
+          "package_name": "com.developerofamigos.travelamigos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "33355469857-u7b94pmti3rkrsc6baeltomeooc10l5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA530mW5TFNehz6mFAlDXvNsgC_whauFZY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "33355469857-u7b94pmti3rkrsc6baeltomeooc10l5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

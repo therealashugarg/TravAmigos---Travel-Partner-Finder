@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>33355469857-0hqj2m39c87p1cl2msl5b2bnfbh0vruh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.33355469857-0hqj2m39c87p1cl2msl5b2bnfbh0vruh</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAevGX1GdATYnTUWm_PVa9QBtgC8YRvGl8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>33355469857</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.developerofamigos.travelamigos</string>
+	<key>PROJECT_ID</key>
+	<string>travelamigos-b5f65</string>
+	<key>STORAGE_BUCKET</key>
+	<string>travelamigos-b5f65.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:33355469857:ios:c66217761db10ea76eff60</string>
+</dict>
+</plist>
