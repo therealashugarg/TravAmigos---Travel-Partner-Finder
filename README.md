@@ -11,15 +11,8 @@ TravAmigos - Travel Partner Finder is a mobile application developed in Flutter 
 5. VS Code IDE as a code editor
 6. Simulator for testing
 
-## Getting Started
+# Screenshots
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![1](https://user-images.githubusercontent.com/73381765/212177557-9593ffdf-968e-435a-8d0e-c7098d4f833d.png)
+![2](https://user-images.githubusercontent.com/73381765/212177602-4454f8ae-78dc-4bbd-ac51-381599e3713d.png)
+![3](https://user-images.githubusercontent.com/73381765/212177614-d6234f7e-014f-4802-88cd-be9b82c10e2b.png)
