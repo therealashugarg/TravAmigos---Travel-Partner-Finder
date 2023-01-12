@@ -1,4 +1,4 @@
-# travelamigos
+# TravAmigos
 
 TravAmigos - Travel Partner Finder is a mobile application developed in Flutter that allows users to find travel companions for their upcoming trips. The app is designed to help users connect the like-minded strangers with one another who seek the similar travel experiences and share the same love of exploring new places and same interests, as well as it enriches them by connections. The app has a simple and user-friendly interface that makes it easy to find and connect with potential partners and it enriches them by connections. In this application you can share your itinerary through post and connects with interested travellers and make plans together. The app also allows users to chat with each other, exchange photos and information, and make plans for their trip. 
 
