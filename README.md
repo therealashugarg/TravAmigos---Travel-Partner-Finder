@@ -7,9 +7,10 @@ TravAmigos - Travel Partner Finder is a mobile application developed in Flutter 
 1. Flutter
 2. Dart
 3. Firebase
-4. Maps API
-5. VS Code IDE as a code editor
-6. Simulator for testing
+4. GetX State Management
+5. Maps API
+6. VS Code IDE as a Code editor
+7. Simulator for testing
 
 # Screenshots
 
