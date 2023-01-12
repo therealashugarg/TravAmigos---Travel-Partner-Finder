@@ -13,11 +13,4 @@ class UserController extends GetxController {
   void clear() {
     _userModel.value = UserModel();
   }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  
 }

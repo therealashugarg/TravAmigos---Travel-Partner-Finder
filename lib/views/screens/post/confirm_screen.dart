@@ -1,14 +1,19 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: must_be_immutable
 
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:travelamigos/views/screens/post/demo.dart';
+import 'package:travelamigos/controllers/upload_post_controller.dart';
+import 'package:travelamigos/views/screens/home/home_page.dart';
 
 class ConfirmScreen extends StatelessWidget {
-  FocusNode myFocusNode = new FocusNode();
+  FocusNode myFocusNode = FocusNode();
+  TextEditingController captionController = TextEditingController();
   final File imageFile;
   final String imagePath;
+
+  UploadPostController uploadPostController = Get.put(UploadPostController());
+
   ConfirmScreen({
     Key? key,
     required this.imageFile,
@@ -28,16 +33,16 @@ class ConfirmScreen extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
                       onTap: () => Get.back(),
-                      child: Icon(Icons.arrow_back,
+                      child: const Icon(Icons.arrow_back,
                           size: 32, color: Colors.black54))),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 18),
               child: Column(children: [
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ClipRRect(
                   borderRadius: BorderRadius.circular(28),
-                  child: Container(
+                  child: SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.width - 36,
                     child: Image.file(
@@ -46,15 +51,15 @@ class ConfirmScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 buildTextFieldForCaption(),
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 Row(children: [
                   InkWell(
                     highlightColor: Colors.white,
                     splashColor: Colors.white,
                     onTap: () {
-                      // Get.to(GMapScreen());
+                      Get.to(HomePage());
                     },
                     child: Padding(
                       padding: const EdgeInsets.only(left: 3, right: 12),
@@ -80,15 +85,14 @@ class ConfirmScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                      ),
+                      ), 
                     ),
                   ),
                   InkWell(
                     highlightColor: Colors.white,
                     splashColor: Colors.white,
-                    onTap: () {
-                      // Get.to(GMapScreen());
-                    },
+                    onTap: () => uploadPostController.uploadPost(
+                        captionController.text, imagePath),
                     child: Padding(
                       padding: const EdgeInsets.only(left: 12, right: 3),
                       child: Container(
@@ -96,7 +100,7 @@ class ConfirmScreen extends StatelessWidget {
                         height: 50,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
-                            color: Color(0XFFA56FF8)),
+                            color: const Color(0XFFA56FF8)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: const [
@@ -117,7 +121,7 @@ class ConfirmScreen extends StatelessWidget {
                     ),
                   ),
                 ]),
-                SizedBox(
+                const SizedBox(
                   height: 20,
                 ),
               ]),
@@ -136,10 +140,11 @@ class ConfirmScreen extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 5, 15, 15),
           child: TextField(
+            controller: captionController,
             maxLines: 5,
             keyboardType: TextInputType.multiline,
             textInputAction: TextInputAction.newline,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
             decoration: InputDecoration(
                 labelText: "Caption",
                 focusColor: Colors.black54,

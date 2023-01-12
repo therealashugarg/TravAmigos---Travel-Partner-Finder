@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -36,11 +34,9 @@ class AuthController extends GetxController {
     ever(_user, _initialScreen);
   }
 
-
-
   _initialScreen(User? user) {
     if (user == null) {
-      Get.offAll(() => Welcome());
+      Get.offAll(() => const Welcome());
     } else {
       Get.offAll(() => HomePage());
     }
@@ -61,24 +57,23 @@ class AuthController extends GetxController {
             age: null,
             name: null,
             location: null,
-            about: null);
-        await firestore
-            .collection('users')
-            .doc(user.uid)
-            .set(_user.toJson());
-        // if (await Database().createNewUser(_user)) {
-        //   Get.find<UserController>().user = _user;
-        // }
+            profilephoto: 'https://firebasestorage.googleapis.com/v0/b/travelamigos-b5f65.appspot.com/o/avatar%2F2.jpg?alt=media&token=e29b2da0-0345-44f5-ab02-e5fa4507817d',
+            about: null,
+            connections: 0,
+            uploads: 0,
+            referances: 0
+            );
+        await firestore.collection('users').doc(user.uid).set(_user.toJson());
       }));
     } catch (e) {
       Get.snackbar("About User", "User message",
           backgroundColor: darkPurple.withOpacity(0.4),
           snackPosition: SnackPosition.BOTTOM,
-          titleText: Text("Account creation failed",
+          titleText: const Text("Account creation failed",
               style: TextStyle(color: whiteColor)),
           messageText: Text(
             e.toString(),
-            style: TextStyle(color: whiteColor),
+            style: const TextStyle(color: whiteColor),
           ));
     }
   }
@@ -101,10 +96,10 @@ class AuthController extends GetxController {
             backgroundColor: darkPurple.withOpacity(0.4),
             snackPosition: SnackPosition.BOTTOM,
             titleText:
-                Text("Login failed", style: TextStyle(color: whiteColor)),
+                const Text("Login failed", style: TextStyle(color: whiteColor)),
             messageText: Text(
               e.toString(),
-              style: TextStyle(color: whiteColor),
+              style: const TextStyle(color: whiteColor),
             ));
       }
     }

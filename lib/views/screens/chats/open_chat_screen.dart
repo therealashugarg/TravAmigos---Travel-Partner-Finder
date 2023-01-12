@@ -1,8 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/instance_manager.dart';
 import 'package:travelamigos/main.dart';
 
 class OpenChatScreen extends StatelessWidget {
@@ -18,7 +15,7 @@ class OpenChatScreen extends StatelessWidget {
             children: [
               _topChat(),
               _bodyChat(),
-              SizedBox(
+              const SizedBox(
                 height: 120,
               )
             ],
@@ -29,9 +26,9 @@ class OpenChatScreen extends StatelessWidget {
     );
   }
 
-    _topChat() {
+  _topChat() {
     return Container(
-      padding: EdgeInsets.only(left: 30, right: 30, top: 100, bottom: 25),
+      padding: const EdgeInsets.only(left: 30, right: 30, top: 100, bottom: 25),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -39,13 +36,13 @@ class OpenChatScreen extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () => Get.back(),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   size: 25,
                   color: Colors.white,
                 ),
               ),
-              Text(
+              const Text(
                 'Fiona',
                 style: TextStyle(
                     fontSize: 28,
@@ -54,7 +51,6 @@ class OpenChatScreen extends StatelessWidget {
               ),
             ],
           ),
-         
         ],
       ),
     );
@@ -63,15 +59,15 @@ class OpenChatScreen extends StatelessWidget {
   Widget _bodyChat() {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.only(left: 25, right: 25, top: 25),
+        padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45), topRight: Radius.circular(45)),
           color: Colors.white,
         ),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
             _itemChat(
               avatar: 'assets/image/5.jpg',
@@ -146,17 +142,17 @@ class OpenChatScreen extends StatelessWidget {
               ),
         Flexible(
           child: Container(
-            margin: EdgeInsets.only(left: 10, right: 10, top: 20),
-            padding: EdgeInsets.all(20),
+            margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: chat == 0 ? Colors.indigo.shade100 : Colors.indigo.shade50,
               borderRadius: chat == 0
-                  ? BorderRadius.only(
+                  ? const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                       bottomLeft: Radius.circular(30),
                     )
-                  : BorderRadius.only(
+                  : const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                       bottomRight: Radius.circular(30),
@@ -170,7 +166,7 @@ class OpenChatScreen extends StatelessWidget {
                 '$time',
                 style: TextStyle(color: Colors.grey.shade400),
               )
-            : SizedBox(),
+            : const SizedBox(),
       ],
     );
   }
@@ -181,7 +177,7 @@ class OpenChatScreen extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         child: Container(
           height: 120,
-          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           color: Colors.white,
           child: TextField(
             decoration: InputDecoration(
@@ -190,8 +186,8 @@ class OpenChatScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.indigo),
-                padding: EdgeInsets.all(14),
-                child: Icon(
+                padding: const EdgeInsets.all(14),
+                child: const Icon(
                   Icons.send_rounded,
                   color: Colors.white,
                   size: 28,
@@ -199,8 +195,8 @@ class OpenChatScreen extends StatelessWidget {
               ),
               filled: true,
               fillColor: Colors.blueGrey[50],
-              labelStyle: TextStyle(fontSize: 12),
-              contentPadding: EdgeInsets.all(20),
+              labelStyle: const TextStyle(fontSize: 12),
+              contentPadding: const EdgeInsets.all(20),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blueGrey.shade50),
                 borderRadius: BorderRadius.circular(25),
@@ -221,7 +217,11 @@ class Avatar extends StatelessWidget {
   final double size;
   final image;
   final EdgeInsets margin;
-  Avatar({this.image, this.size = 50, this.margin = const EdgeInsets.all(0)});
+  const Avatar(
+      {super.key,
+      this.image,
+      this.size = 50,
+      this.margin = const EdgeInsets.all(0)});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -229,9 +229,9 @@ class Avatar extends StatelessWidget {
       child: Container(
         width: size,
         height: size,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
-          image: new DecorationImage(
+          image: DecorationImage(
             image: AssetImage(image),
           ),
         ),

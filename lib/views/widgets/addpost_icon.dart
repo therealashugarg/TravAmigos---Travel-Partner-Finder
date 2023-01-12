@@ -6,8 +6,8 @@ class AddPost extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 32,
-      height: 28,
+      width: 30,
+      height: 26,
       child: Stack(
         children: [
           

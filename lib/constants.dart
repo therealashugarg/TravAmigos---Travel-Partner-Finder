@@ -1,4 +1,6 @@
-// ignore_for_file: prefer_const_constructors
+// library_private_types_in_public_api, prefer_typing_uninitialized_variables
+
+// ignore_for_file: library_private_types_in_public_api, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 
@@ -11,15 +13,16 @@ const textColorH = Color(0XFF312B2B);
 const darkPurple = Color(0XFF682AD5);
 const lightBlue = Colors.lightBlue;
 
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Flutter Chat UI',
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
@@ -28,6 +31,8 @@ class MyApp extends StatelessWidget {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -50,11 +55,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _top() {
     return Container(
-      padding: EdgeInsets.only(top: 30, left: 30),
+      padding: const EdgeInsets.only(top: 30, left: 30),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Chat with \nyour friends',
             style: TextStyle(
                 fontSize: 28, fontWeight: FontWeight.bold, color: Colors.white),
@@ -62,31 +67,31 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.all(14),
+                padding: const EdgeInsets.all(14),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.black12,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.search,
                   size: 30,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 100,
                   child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     scrollDirection: Axis.horizontal,
                     shrinkWrap: true,
                     itemCount: 8,
                     itemBuilder: (context, index) {
                       return Avatar(
-                        margin: EdgeInsets.only(right: 15),
+                        margin: const EdgeInsets.only(right: 15),
                         image: 'assets/image/${index + 1}.jpg',
                       );
                     },
@@ -103,16 +108,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _body() {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45), topRight: Radius.circular(45)),
           color: Colors.white,
         ),
         child: ListView(
-          padding: EdgeInsets.only(top: 35),
-          physics: BouncingScrollPhysics(),
+          padding: const EdgeInsets.only(top: 35),
+          physics: const BouncingScrollPhysics(),
           children: [
             _itemChats(
               avatar: 'assets/image/2.jpg',
@@ -165,17 +170,17 @@ class _HomeScreenState extends State<HomeScreen> {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => ChatPage(),
+            builder: (context) => const ChatPage(),
           ),
         );
       },
       child: Card(
-        margin: EdgeInsets.symmetric(vertical: 20),
+        margin: const EdgeInsets.symmetric(vertical: 20),
         elevation: 0,
         child: Row(
           children: [
             Avatar(
-              margin: EdgeInsets.only(right: 20),
+              margin: const EdgeInsets.only(right: 20),
               size: 60,
               image: avatar,
             ),
@@ -188,23 +193,23 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: [
                       Text(
                         '$name',
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 17, fontWeight: FontWeight.bold),
                       ),
                       Text(
                         '$time',
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.grey, fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
                     '$chat',
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black54,
                       fontWeight: FontWeight.bold,
                     ),
@@ -220,6 +225,8 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 class ChatPage extends StatefulWidget {
+  const ChatPage({super.key});
+
   @override
   _ChatPageState createState() => _ChatPageState();
 }
@@ -236,7 +243,7 @@ class _ChatPageState extends State<ChatPage> {
               children: [
                 _topChat(),
                 _bodyChat(),
-                SizedBox(
+                const SizedBox(
                   height: 120,
                 )
               ],
@@ -250,7 +257,7 @@ class _ChatPageState extends State<ChatPage> {
 
   _topChat() {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -258,13 +265,13 @@ class _ChatPageState extends State<ChatPage> {
             children: [
               GestureDetector(
                 onTap: () => Navigator.of(context).pop(),
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   size: 25,
                   color: Colors.white,
                 ),
               ),
-              Text(
+              const Text(
                 'Fiona',
                 style: TextStyle(
                     fontSize: 28,
@@ -276,27 +283,27 @@ class _ChatPageState extends State<ChatPage> {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.black12,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.call,
                   size: 25,
                   color: Colors.white,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   color: Colors.black12,
                 ),
-                child: Icon(
+                child: const Icon(
                   Icons.videocam,
                   size: 25,
                   color: Colors.white,
@@ -312,15 +319,15 @@ class _ChatPageState extends State<ChatPage> {
   Widget _bodyChat() {
     return Expanded(
       child: Container(
-        padding: EdgeInsets.only(left: 25, right: 25, top: 25),
+        padding: const EdgeInsets.only(left: 25, right: 25, top: 25),
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45), topRight: Radius.circular(45)),
           color: Colors.white,
         ),
         child: ListView(
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           children: [
             _itemChat(
               avatar: 'assets/image/5.jpg',
@@ -384,17 +391,17 @@ class _ChatPageState extends State<ChatPage> {
               ),
         Flexible(
           child: Container(
-            margin: EdgeInsets.only(left: 10, right: 10, top: 20),
-            padding: EdgeInsets.all(20),
+            margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
+            padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               color: chat == 0 ? Colors.indigo.shade100 : Colors.indigo.shade50,
               borderRadius: chat == 0
-                  ? BorderRadius.only(
+                  ? const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                       bottomLeft: Radius.circular(30),
                     )
-                  : BorderRadius.only(
+                  : const BorderRadius.only(
                       topLeft: Radius.circular(30),
                       topRight: Radius.circular(30),
                       bottomRight: Radius.circular(30),
@@ -408,7 +415,7 @@ class _ChatPageState extends State<ChatPage> {
                 '$time',
                 style: TextStyle(color: Colors.grey.shade400),
               )
-            : SizedBox(),
+            : const SizedBox(),
       ],
     );
   }
@@ -419,7 +426,7 @@ class _ChatPageState extends State<ChatPage> {
         alignment: Alignment.bottomCenter,
         child: Container(
           height: 120,
-          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+          padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
           color: Colors.white,
           child: TextField(
             decoration: InputDecoration(
@@ -428,8 +435,8 @@ class _ChatPageState extends State<ChatPage> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(50),
                     color: Colors.indigo),
-                padding: EdgeInsets.all(14),
-                child: Icon(
+                padding: const EdgeInsets.all(14),
+                child: const Icon(
                   Icons.send_rounded,
                   color: Colors.white,
                   size: 28,
@@ -437,8 +444,8 @@ class _ChatPageState extends State<ChatPage> {
               ),
               filled: true,
               fillColor: Colors.blueGrey[50],
-              labelStyle: TextStyle(fontSize: 12),
-              contentPadding: EdgeInsets.all(20),
+              labelStyle: const TextStyle(fontSize: 12),
+              contentPadding: const EdgeInsets.all(20),
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.blueGrey.shade50),
                 borderRadius: BorderRadius.circular(25),
@@ -459,7 +466,11 @@ class Avatar extends StatelessWidget {
   final double size;
   final image;
   final EdgeInsets margin;
-  Avatar({this.image, this.size = 50, this.margin = const EdgeInsets.all(0)});
+  const Avatar(
+      {super.key,
+      this.image,
+      this.size = 50,
+      this.margin = const EdgeInsets.all(0)});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -467,9 +478,9 @@ class Avatar extends StatelessWidget {
       child: Container(
         width: size,
         height: size,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
           shape: BoxShape.circle,
-          image: new DecorationImage(
+          image: DecorationImage(
             image: AssetImage(image),
           ),
         ),

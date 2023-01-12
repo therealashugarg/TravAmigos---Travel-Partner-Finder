@@ -6,6 +6,8 @@ import 'package:travelamigos/views/screens/auth/welcome.dart';
 import 'package:travelamigos/views/screens/home/home_page.dart';
 
 class Root extends GetWidget<AuthController> {
+  const Root({super.key});
+
   @override
   Widget build(BuildContext context) {
     return GetX(
@@ -16,7 +18,7 @@ class Root extends GetWidget<AuthController> {
         if (Get.find<AuthController>().auth.currentUser != null) {
           return HomePage();
         } else {
-          return Welcome();
+          return const Welcome();
         }
       },
     );

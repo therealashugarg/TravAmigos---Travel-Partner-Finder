@@ -1,12 +1,17 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: library_private_types_in_public_api
 
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:get/get.dart';
-import 'package:travelamigos/controllers/value_controller.dart';
+import 'package:travelamigos/constants/strings.dart';
+import 'package:travelamigos/controllers/upload_plan_controller.dart';
 import 'package:travelamigos/views/screens/post/confirm_screen.dart';
+import 'package:uuid/uuid.dart';
+import 'package:http/http.dart' as http;
 
 class AddPostScreen extends StatefulWidget {
   const AddPostScreen({Key? key}) : super(key: key);
@@ -25,6 +30,78 @@ class _AddPostScreenState extends State<AddPostScreen> {
     });
   }
 
+  String? planText = '';
+  String? placeText = '';
+  TextEditingController planController = TextEditingController();
+  TextEditingController placeController = TextEditingController();
+  DateTime dateController = DateTime.now();
+
+  UploadPlanController uploadPlanController = Get.put(UploadPlanController());
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    planController.addListener(() {
+      setState(() {
+        planText = planController.text;
+      });
+    });
+    placeController.addListener(() {
+      setState(() {
+        placeText = placeController.text;
+      });
+    });
+  }
+
+  /*
+  String location = "Search Location";
+  TextEditingController _controller = TextEditingController();
+  var uuid = Uuid();
+  String _sessionToken = '122344';
+  List<dynamic> _placesList = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    _controller.addListener(() {
+      onChange();
+    });
+  }
+
+  void onChange() {
+    if (_sessionToken == null) {
+      setState(() {
+        _sessionToken = uuid.v4();
+      });
+    }
+
+    getSuggestion(_controller.text);
+  }
+
+  void getSuggestion(String input) async {
+    String kPLACES_API_KEY = googleApikey;
+    String baseURL =
+        'https://maps.googleapis.com/maps/api/place/autocomplete/json';
+    String request =
+        '$baseURL?input=$input&key=$kPLACES_API_KEY&sessiontoken=$_sessionToken';
+
+    var response = await http.get(Uri.parse(request));
+    var data = response.body.toString();
+
+    print(data);
+    if (response.statusCode == 200) {
+      setState(() {
+        _placesList = jsonDecode(response.body.toString())['predictions'];
+      });
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+  */
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -39,11 +116,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                   alignment: Alignment.topLeft,
                   child: GestureDetector(
                       onTap: () => Get.back(),
-                      child: Icon(Icons.arrow_back,
+                      child: const Icon(Icons.arrow_back,
                           size: 32, color: Colors.black54))),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 82),
+              padding: const EdgeInsets.symmetric(horizontal: 82),
               child: Container(
                 height: 45,
                 decoration: BoxDecoration(
@@ -51,10 +128,10 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     borderRadius: BorderRadius.circular(25.0)),
                 child: TabBar(
                   indicator: BoxDecoration(
-                      color: Color(0XFFA56FF8),
+                      color: const Color(0XFFA56FF8),
                       borderRadius: BorderRadius.circular(25.0)),
                   labelColor: Colors.white,
-                  unselectedLabelColor: Colors.black,
+                  unselectedLabelColor: Colors.black54,
                   tabs: const [
                     Tab(
                       text: 'Plan',
@@ -68,22 +145,119 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             Expanded(
                 child: TabBarView(children: [
-              Column(children: [
-                SizedBox(height: 30),
-                Container(
-                    width: 200,
-                    height: 200,
-                    color: Colors.deepPurple.shade200,
-                    child: Center(
-                        child: Text("Plan Pages",
-                            style: TextStyle(color: Colors.white))))
-              ]),
+              // Plan Page
+              Column(
+                children: [
+                  const SizedBox(height: 30),
+                  Form(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 28.0,
+                      ),
+                      child: Column(
+                        children: [
+                          CupertinoButton(
+                              child: Text(
+                                '${dateController.month} - ${dateController.day} - ${dateController.year}',
+                                style: TextStyle(color: Colors.grey.shade600),
+                              ),
+                              onPressed: () {
+                                showCupertinoModalPopup(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return SizedBox(
+                                          height: 250,
+                                          child: CupertinoDatePicker(
+                                            backgroundColor: Colors.white,
+                                            initialDateTime: dateController,
+                                            minimumYear: dateController.year,
+                                            minimumDate: dateController,
+                                            // minimumDate: dateController,
+                                            // firstDate: DateTime.now()
+                                            // .subtract(Duration(days: 1)),
+                                            onDateTimeChanged:
+                                                (DateTime newTime) {
+                                              setState(() {
+                                                dateController = newTime;
+                                              });
+                                            },
+                                            mode: CupertinoDatePickerMode.date,
+                                          ));
+                                    });
+                              }),
+                          TextFormField(
+                            controller: placeController,
+                            decoration: const InputDecoration(
+                                hintText: 'Search Places'),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            controller: planController,
+                            maxLines: 5,
+                            // onChanged: (text) {
+                            //   setState(() {
+                            //     planText = text;
+                            //   });
+                            // },
+                            decoration: const InputDecoration(hintText: 'Plan'),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  const Spacer(),
+                  InkWell(
+                    onTap: () {
+                      if (planText!.isNotEmpty || placeText!.isNotEmpty) {
+                        uploadPlanController.uploadPlan(dateController,
+                            placeText.toString(), planText.toString());
+                      } else {
+                        return;
+                      }
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 82),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: planText!.isEmpty || placeText!.isEmpty
+                                ? Colors.grey[300]
+                                : const Color(0XFFA56FF8)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 2),
+                              child: Text(
+                                'Next',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  color: planText!.isEmpty || placeText!.isEmpty
+                                      ? Colors.black54
+                                      : Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20)
+                ],
+              ),
+              // Post Page
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                SizedBox(height: 35),
+                const SizedBox(height: 35),
                 if (pickedImage != null)
                   ClipRRect(
                     borderRadius: BorderRadius.circular(28),
-                    child: Container(
+                    child: SizedBox(
                       width: 380,
                       height: 380,
                       child: Image.file(
@@ -92,7 +266,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                       ),
                     ),
                   ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: pickImage,
                   child: Container(
@@ -104,11 +278,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 2),
+                        const Padding(
+                          padding: EdgeInsets.only(top: 2),
                           child: Text(
                             'Upload',
                             style: TextStyle(
@@ -118,27 +292,30 @@ class _AddPostScreenState extends State<AddPostScreen> {
                             ),
                           ),
                         ),
-                        Container(
-                            height: 24,
-                            child:
-                                Image.asset('assets/icons/cloud-upload.png', color: Colors.black54,)),
                         SizedBox(
+                            height: 24,
+                            child: Image.asset(
+                              'assets/icons/cloud-upload.png',
+                              color: Colors.black54,
+                            )),
+                        const SizedBox(
                           width: 5,
                         ),
                       ],
                     ),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 InkWell(
                   onTap: () {
-                    if (pickedImage != null)
+                    if (pickedImage != null) {
                       Get.to(ConfirmScreen(
                         imageFile: File(pickedImage!.path),
                         imagePath: pickedImage!.path,
                       ));
-                    else
+                    } else {
                       return;
+                    }
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 82),
@@ -149,7 +326,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                           borderRadius: BorderRadius.circular(50),
                           color: pickedImage == null
                               ? Colors.grey[300]
-                              : Color(0XFFA56FF8)),
+                              : const Color(0XFFA56FF8)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -160,8 +337,8 @@ class _AddPostScreenState extends State<AddPostScreen> {
                               style: TextStyle(
                                 fontSize: 14,
                                 color: pickedImage == null
-                              ? Colors.black54
-                              : Colors.white,
+                                    ? Colors.black54
+                                    : Colors.white,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -171,7 +348,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20)
+                const SizedBox(height: 20)
               ])
             ]))
           ],
@@ -180,3 +357,62 @@ class _AddPostScreenState extends State<AddPostScreen> {
     );
   }
 }
+
+/*
+                          Positioned(
+                            //search input bar
+                            top: 10,
+                            child: InkWell(
+                              onTap: () async {
+                                var place = await PlacesAutocomplete.show(
+                                    context: context,
+                                    apiKey: googleApikey,
+                                    mode: Mode.overlay,
+                                    types: [],
+                                    strictbounds: false,
+                                    components: [
+                                      Component(Component.country, 'np')
+                                    ],
+                                    //google_map_webservice package
+                                    onError: (err) {
+                                      print(err);
+                                    });
+
+                                if (place != null) {
+                                  setState(() {
+                                    location = place.description.toString();
+                                  });
+
+                                  //form google_maps_webservice package
+                                  final plist = GoogleMapsPlaces(
+                                    apiKey: googleApikey,
+                                    apiHeaders:
+                                        await GoogleApiHeaders().getHeaders(),
+                                    //from google_api_headers package
+                                  );
+                                  String placeid = place.placeId ?? "0";
+                                  final detail =
+                                      await plist.getDetailsByPlaceId(placeid);
+                                  final geometry = detail.result.geometry!;
+                                  final lat = geometry.location.lat;
+                                  final lang = geometry.location.lng;
+                                  var newlatlang = LatLng(lat, lang);
+                                }
+                              },
+                              child: Card(
+                                child: Container(
+                                  padding: EdgeInsets.all(0),
+                                  width: MediaQuery.of(context).size.width - 40,
+                                  child: ListTile(
+                                    title: Text(
+                                      location,
+                                      style: TextStyle(fontSize: 18),
+                                    ),
+                                    trailing: Icon(Icons.search),
+                                    dense: true,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          */

@@ -18,7 +18,7 @@ class Database {
       });
       return true;
     } catch (e) {
-      print(e);
+      // print(e);
       return false;
     }
   }
@@ -30,7 +30,7 @@ class Database {
 
       return UserModel.fromSnap(doc);
     } catch (e) {
-      print(e);
+      // print(e);
       rethrow;
     }
   }

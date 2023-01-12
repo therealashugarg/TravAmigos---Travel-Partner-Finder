@@ -1,14 +1,9 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:travelamigos/constants.dart';
 import 'package:travelamigos/controllers/auth_controller.dart';
 import 'package:travelamigos/controllers/bindings/authBinding.dart';
-import 'package:travelamigos/utils/root.dart';
-import 'package:travelamigos/views/screens/auth/welcome.dart';
 import 'package:travelamigos/views/screens/home/home_page.dart';
 
 class Palette {
@@ -43,8 +38,8 @@ class MyApp extends StatelessWidget {
         initialBinding: AuthBinding(),
         theme: ThemeData(
             scaffoldBackgroundColor: whiteColor,
-            textTheme:
-                TextTheme(bodyText2: TextStyle(fontFamily: 'JosefinSans')),
+            textTheme: const TextTheme(
+                bodyMedium: TextStyle(fontFamily: 'JosefinSans')),
             primarySwatch: Palette.kToDark),
         home: HomePage());
   }

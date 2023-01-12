@@ -1,6 +1,6 @@
 const List postsList = [
   {
-    "name": "Wendy Wei",
+    "name": "Wendy Wei", 
     "img":
         "https://images.pexels.com/photos/3990301/pexels-photo-3990301.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
     "postImg":
@@ -9,7 +9,7 @@ const List postsList = [
     "like": "5.2k",
     "comment": "1.1k",
     "share": "231"
-  },
+  }, 
   {
     "name": "Axel Oneill",
     "img":

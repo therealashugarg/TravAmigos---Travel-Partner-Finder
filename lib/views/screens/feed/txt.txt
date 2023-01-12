@@ -1,0 +1,55 @@
+IconButton(
+            onPressed: () {
+              setState(() {
+                if (customIcon.icon == Icons.search) {
+                customIcon = const Icon(
+                  Icons.close_rounded,
+                  color: Colors.black,
+                );
+                customSearchBar = TextFormField(
+                          controller: searchController,
+                          decoration: InputDecoration(
+                              // field editing
+                              hintText: " Search",
+                              hintStyle: TextStyle(color: Colors.grey[400]),
+                              contentPadding: const EdgeInsets.only(left: 10),
+                              floatingLabelBehavior: FloatingLabelBehavior.always,
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20))),
+                          // some keyboard settings
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.done,
+                          autofillHints: const [AutofillHints.email]);
+              } else {
+                customIcon = const Icon(
+                  Icons.search,
+                  color: Colors.black,
+                );
+                customSearchBar = Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        "TravAmigos",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              });
+            },
+            icon: customIcon),
+
+
+
+
+
+
+
+
+

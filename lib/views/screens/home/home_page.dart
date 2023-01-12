@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// prefer_const_literals_to_create_immutables
 
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/instance_manager.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:travelamigos/controllers/auth_controller.dart';
 import 'package:travelamigos/controllers/value_controller.dart';
 import 'package:travelamigos/main.dart';
 import 'package:travelamigos/views/screens/chats/chat_page.dart';
@@ -23,7 +22,12 @@ class HomePage extends StatelessWidget {
       body: Obx(
         () => IndexedStack(
           index: pageController.pageIndex.value,
-          children: [FeedPage(), InterestedPage(), ChatPage(), MyProfileScreen(uid: AuthController.instance.user.uid,)],
+          children: [
+            FeedPage(),
+            const InterestedPage(),
+            const ChatPage(),
+            MyProfileScreen()
+          ],
         ),
       ),
       bottomNavigationBar: Container(
@@ -36,7 +40,7 @@ class HomePage extends StatelessWidget {
             activeColor: Colors.white,
             rippleColor: Colors.grey[800]!,
             hoverColor: Colors.grey[700]!,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             onTabChange: (page) {
               pageController.pageIndex.value = page;
             },
@@ -44,7 +48,7 @@ class HomePage extends StatelessWidget {
               GButton(
                 icon: LineIcons.home,
                 text: 'Home',
-                iconColor: Colors.grey[800], 
+                iconColor: Colors.grey[800],
                 iconActiveColor: Colors.white,
                 textColor: Colors.white,
                 backgroundColor: Palette.kToDark,
